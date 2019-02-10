@@ -1,0 +1,91 @@
+type Person {
+  playerID: ID! @unique
+  birthYear: Int
+  birthMonth: Int
+  birthDay: Int
+  birthCountry: String
+  birthState: String
+  birthCity: String
+  deathYear: Int
+  deathMonth: Int
+  deathDay: Int
+  deathCountry: String
+  deathState: String
+  deathCity: String
+  nameFirst: String
+  nameLast: String
+  nameGiven: String
+  weight: Int
+  height: Int
+  bats: String
+  throws: String
+  debut: String
+  finalGame: String
+  retroID: String
+  bbrefID: String
+
+  batting: [Batting!]!
+  pitching: [Pitching!]!
+}
+
+type Batting {
+  playerID: ID!
+  yearID: Int
+  stint: Int
+  teamID: String
+  lgID: String
+  G: Int
+  AB: Int
+  R: Int
+  H: Int
+  Double: Int
+  Triple: Int
+  HR: Int
+  RBI: Int
+  SB: Int
+  CS: Int
+  BB: Int
+  SO: Int
+  IBB: Int
+  HBP: Int
+  SH: Int
+  SF: Int
+  GIDP: Int
+
+  person: Person!
+}
+
+type Pitching {
+  playerID: ID!
+  yearID: Int
+  stint: Int
+  teamID: String
+  lgID: String
+  W: Int
+  L: Int
+  G: Int
+  GS: Int
+  CG: Int
+  SHO: Int
+  SV: Int
+  IPouts: Int
+  H: Int
+  ER: Int
+  HR: Int
+  BB: Int
+  SO: Int
+  BAOpp: Float
+  ERA: Float
+  IBB: Int
+  WP: Int
+  HBP: Int
+  BK: Int
+  BFP: Int
+  GF: Int
+  R: Int
+  SH: Int
+  SF: Int
+  GIDP: Int
+
+  person: Person!
+}

@@ -1,0 +1,515 @@
+type Query {
+  scoring(params: ScoringParams, where: PersonWhereInput, orderBy: PersonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Person]!
+  scoringConnection(params: ScoringParams, where: PersonWhereInput, orderBy: PersonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PersonConnection!
+}
+
+type HittingParams {
+  H: Int
+  Double: Int
+  Triple: Int
+  HR: Int
+  TB: Int
+  K: Int
+  BB: Int
+  SB: Int
+  CS: Int
+}
+
+type PitchingParams {
+  IP: Int
+  W: Int
+  L: Int
+  QS: Int
+  K: Int
+  BB: Int
+}
+
+type ScoringParams {
+  Hitting: HittingParams
+  Pitching: PitchingParams
+}
+
+type Person {
+  playerID: ID!
+
+  nameFirst: String
+  nameLast: String
+  nameGiven: String
+  
+  birthYear: String
+  birthMonth: String
+  birthDay: String
+  weight: String
+  height: String
+  bats: String
+  throws: String
+
+  batting: [Batting!]!
+  pitching: [Batting!]!
+}
+
+type Batting {
+  playerID: ID!
+  yearID: String
+  stint: String
+  teamID: String
+  lgID: String
+  G: Int
+  AB: Int
+  R: Int
+  H: Int
+  Double: Int
+  Triple: Int
+  HR: Int
+  RBI: Int
+  SB: Int
+  CS: Int
+  BB: Int
+  SO: Int
+  IBB: Int
+  HBP: Int
+  SH: Int
+  SF: Int
+  GIDP: Int
+}
+
+type Pitching {
+  playerID: ID!
+  yearID: String
+  stint: String
+  teamID: String
+  lgID: String
+  W: Int
+  L: Int
+  G: Int
+  GS: Int
+  CG: Int
+  SHO: Int
+  SV: Int
+  IPouts: Int
+  H: Int
+  ER: Int
+  HR: Int
+  BB: Int
+  SO: Int
+  BAOpp: Int
+  ERA: Float
+  IBB: Int
+  WP: Int
+  HBP: Int
+  BK: Int
+  BFP: Int
+  GF: Int
+  R: Int
+  SH: Int
+  SF: Int
+  GIDP: Int
+}
+
+input PersonWhereUniqueInput {
+  playerID: ID
+}
+
+input PersonWhereInput {
+  playerID: ID
+  playerID_not: ID
+  playerID_in: [ID!]
+  playerID_not_in: [ID!]
+  playerID_lt: ID
+  playerID_lte: ID
+  playerID_gt: ID
+  playerID_gte: ID
+  playerID_contains: ID
+  playerID_not_contains: ID
+  playerID_starts_with: ID
+  playerID_not_starts_with: ID
+  playerID_ends_with: ID
+  playerID_not_ends_with: ID
+  birthYear: String
+  birthYear_not: String
+  birthYear_in: [String!]
+  birthYear_not_in: [String!]
+  birthYear_lt: String
+  birthYear_lte: String
+  birthYear_gt: String
+  birthYear_gte: String
+  birthYear_contains: String
+  birthYear_not_contains: String
+  birthYear_starts_with: String
+  birthYear_not_starts_with: String
+  birthYear_ends_with: String
+  birthYear_not_ends_with: String
+  birthMonth: String
+  birthMonth_not: String
+  birthMonth_in: [String!]
+  birthMonth_not_in: [String!]
+  birthMonth_lt: String
+  birthMonth_lte: String
+  birthMonth_gt: String
+  birthMonth_gte: String
+  birthMonth_contains: String
+  birthMonth_not_contains: String
+  birthMonth_starts_with: String
+  birthMonth_not_starts_with: String
+  birthMonth_ends_with: String
+  birthMonth_not_ends_with: String
+  birthDay: String
+  birthDay_not: String
+  birthDay_in: [String!]
+  birthDay_not_in: [String!]
+  birthDay_lt: String
+  birthDay_lte: String
+  birthDay_gt: String
+  birthDay_gte: String
+  birthDay_contains: String
+  birthDay_not_contains: String
+  birthDay_starts_with: String
+  birthDay_not_starts_with: String
+  birthDay_ends_with: String
+  birthDay_not_ends_with: String
+  birthCountry: String
+  birthCountry_not: String
+  birthCountry_in: [String!]
+  birthCountry_not_in: [String!]
+  birthCountry_lt: String
+  birthCountry_lte: String
+  birthCountry_gt: String
+  birthCountry_gte: String
+  birthCountry_contains: String
+  birthCountry_not_contains: String
+  birthCountry_starts_with: String
+  birthCountry_not_starts_with: String
+  birthCountry_ends_with: String
+  birthCountry_not_ends_with: String
+  birthState: String
+  birthState_not: String
+  birthState_in: [String!]
+  birthState_not_in: [String!]
+  birthState_lt: String
+  birthState_lte: String
+  birthState_gt: String
+  birthState_gte: String
+  birthState_contains: String
+  birthState_not_contains: String
+  birthState_starts_with: String
+  birthState_not_starts_with: String
+  birthState_ends_with: String
+  birthState_not_ends_with: String
+  birthCity: String
+  birthCity_not: String
+  birthCity_in: [String!]
+  birthCity_not_in: [String!]
+  birthCity_lt: String
+  birthCity_lte: String
+  birthCity_gt: String
+  birthCity_gte: String
+  birthCity_contains: String
+  birthCity_not_contains: String
+  birthCity_starts_with: String
+  birthCity_not_starts_with: String
+  birthCity_ends_with: String
+  birthCity_not_ends_with: String
+  deathYear: String
+  deathYear_not: String
+  deathYear_in: [String!]
+  deathYear_not_in: [String!]
+  deathYear_lt: String
+  deathYear_lte: String
+  deathYear_gt: String
+  deathYear_gte: String
+  deathYear_contains: String
+  deathYear_not_contains: String
+  deathYear_starts_with: String
+  deathYear_not_starts_with: String
+  deathYear_ends_with: String
+  deathYear_not_ends_with: String
+  deathMonth: String
+  deathMonth_not: String
+  deathMonth_in: [String!]
+  deathMonth_not_in: [String!]
+  deathMonth_lt: String
+  deathMonth_lte: String
+  deathMonth_gt: String
+  deathMonth_gte: String
+  deathMonth_contains: String
+  deathMonth_not_contains: String
+  deathMonth_starts_with: String
+  deathMonth_not_starts_with: String
+  deathMonth_ends_with: String
+  deathMonth_not_ends_with: String
+  deathDay: String
+  deathDay_not: String
+  deathDay_in: [String!]
+  deathDay_not_in: [String!]
+  deathDay_lt: String
+  deathDay_lte: String
+  deathDay_gt: String
+  deathDay_gte: String
+  deathDay_contains: String
+  deathDay_not_contains: String
+  deathDay_starts_with: String
+  deathDay_not_starts_with: String
+  deathDay_ends_with: String
+  deathDay_not_ends_with: String
+  deathCountry: String
+  deathCountry_not: String
+  deathCountry_in: [String!]
+  deathCountry_not_in: [String!]
+  deathCountry_lt: String
+  deathCountry_lte: String
+  deathCountry_gt: String
+  deathCountry_gte: String
+  deathCountry_contains: String
+  deathCountry_not_contains: String
+  deathCountry_starts_with: String
+  deathCountry_not_starts_with: String
+  deathCountry_ends_with: String
+  deathCountry_not_ends_with: String
+  deathState: String
+  deathState_not: String
+  deathState_in: [String!]
+  deathState_not_in: [String!]
+  deathState_lt: String
+  deathState_lte: String
+  deathState_gt: String
+  deathState_gte: String
+  deathState_contains: String
+  deathState_not_contains: String
+  deathState_starts_with: String
+  deathState_not_starts_with: String
+  deathState_ends_with: String
+  deathState_not_ends_with: String
+  deathCity: String
+  deathCity_not: String
+  deathCity_in: [String!]
+  deathCity_not_in: [String!]
+  deathCity_lt: String
+  deathCity_lte: String
+  deathCity_gt: String
+  deathCity_gte: String
+  deathCity_contains: String
+  deathCity_not_contains: String
+  deathCity_starts_with: String
+  deathCity_not_starts_with: String
+  deathCity_ends_with: String
+  deathCity_not_ends_with: String
+  nameFirst: String
+  nameFirst_not: String
+  nameFirst_in: [String!]
+  nameFirst_not_in: [String!]
+  nameFirst_lt: String
+  nameFirst_lte: String
+  nameFirst_gt: String
+  nameFirst_gte: String
+  nameFirst_contains: String
+  nameFirst_not_contains: String
+  nameFirst_starts_with: String
+  nameFirst_not_starts_with: String
+  nameFirst_ends_with: String
+  nameFirst_not_ends_with: String
+  nameLast: String
+  nameLast_not: String
+  nameLast_in: [String!]
+  nameLast_not_in: [String!]
+  nameLast_lt: String
+  nameLast_lte: String
+  nameLast_gt: String
+  nameLast_gte: String
+  nameLast_contains: String
+  nameLast_not_contains: String
+  nameLast_starts_with: String
+  nameLast_not_starts_with: String
+  nameLast_ends_with: String
+  nameLast_not_ends_with: String
+  nameGiven: String
+  nameGiven_not: String
+  nameGiven_in: [String!]
+  nameGiven_not_in: [String!]
+  nameGiven_lt: String
+  nameGiven_lte: String
+  nameGiven_gt: String
+  nameGiven_gte: String
+  nameGiven_contains: String
+  nameGiven_not_contains: String
+  nameGiven_starts_with: String
+  nameGiven_not_starts_with: String
+  nameGiven_ends_with: String
+  nameGiven_not_ends_with: String
+  weight: String
+  weight_not: String
+  weight_in: [String!]
+  weight_not_in: [String!]
+  weight_lt: String
+  weight_lte: String
+  weight_gt: String
+  weight_gte: String
+  weight_contains: String
+  weight_not_contains: String
+  weight_starts_with: String
+  weight_not_starts_with: String
+  weight_ends_with: String
+  weight_not_ends_with: String
+  height: String
+  height_not: String
+  height_in: [String!]
+  height_not_in: [String!]
+  height_lt: String
+  height_lte: String
+  height_gt: String
+  height_gte: String
+  height_contains: String
+  height_not_contains: String
+  height_starts_with: String
+  height_not_starts_with: String
+  height_ends_with: String
+  height_not_ends_with: String
+  bats: String
+  bats_not: String
+  bats_in: [String!]
+  bats_not_in: [String!]
+  bats_lt: String
+  bats_lte: String
+  bats_gt: String
+  bats_gte: String
+  bats_contains: String
+  bats_not_contains: String
+  bats_starts_with: String
+  bats_not_starts_with: String
+  bats_ends_with: String
+  bats_not_ends_with: String
+  throws: String
+  throws_not: String
+  throws_in: [String!]
+  throws_not_in: [String!]
+  throws_lt: String
+  throws_lte: String
+  throws_gt: String
+  throws_gte: String
+  throws_contains: String
+  throws_not_contains: String
+  throws_starts_with: String
+  throws_not_starts_with: String
+  throws_ends_with: String
+  throws_not_ends_with: String
+  debut: String
+  debut_not: String
+  debut_in: [String!]
+  debut_not_in: [String!]
+  debut_lt: String
+  debut_lte: String
+  debut_gt: String
+  debut_gte: String
+  debut_contains: String
+  debut_not_contains: String
+  debut_starts_with: String
+  debut_not_starts_with: String
+  debut_ends_with: String
+  debut_not_ends_with: String
+  finalGame: String
+  finalGame_not: String
+  finalGame_in: [String!]
+  finalGame_not_in: [String!]
+  finalGame_lt: String
+  finalGame_lte: String
+  finalGame_gt: String
+  finalGame_gte: String
+  finalGame_contains: String
+  finalGame_not_contains: String
+  finalGame_starts_with: String
+  finalGame_not_starts_with: String
+  finalGame_ends_with: String
+  finalGame_not_ends_with: String
+  retroID: String
+  retroID_not: String
+  retroID_in: [String!]
+  retroID_not_in: [String!]
+  retroID_lt: String
+  retroID_lte: String
+  retroID_gt: String
+  retroID_gte: String
+  retroID_contains: String
+  retroID_not_contains: String
+  retroID_starts_with: String
+  retroID_not_starts_with: String
+  retroID_ends_with: String
+  retroID_not_ends_with: String
+  bbrefID: String
+  bbrefID_not: String
+  bbrefID_in: [String!]
+  bbrefID_not_in: [String!]
+  bbrefID_lt: String
+  bbrefID_lte: String
+  bbrefID_gt: String
+  bbrefID_gte: String
+  bbrefID_contains: String
+  bbrefID_not_contains: String
+  bbrefID_starts_with: String
+  bbrefID_not_starts_with: String
+  bbrefID_ends_with: String
+  bbrefID_not_ends_with: String
+  AND: [PersonWhereInput!]
+  OR: [PersonWhereInput!]
+  NOT: [PersonWhereInput!]
+}
+
+enum PersonOrderByInput {
+  playerID_ASC
+  playerID_DESC
+  birthYear_ASC
+  birthYear_DESC
+  birthMonth_ASC
+  birthMonth_DESC
+  birthDay_ASC
+  birthDay_DESC
+  birthCountry_ASC
+  birthCountry_DESC
+  birthState_ASC
+  birthState_DESC
+  birthCity_ASC
+  birthCity_DESC
+  deathYear_ASC
+  deathYear_DESC
+  deathMonth_ASC
+  deathMonth_DESC
+  deathDay_ASC
+  deathDay_DESC
+  deathCountry_ASC
+  deathCountry_DESC
+  deathState_ASC
+  deathState_DESC
+  deathCity_ASC
+  deathCity_DESC
+  nameFirst_ASC
+  nameFirst_DESC
+  nameLast_ASC
+  nameLast_DESC
+  nameGiven_ASC
+  nameGiven_DESC
+  weight_ASC
+  weight_DESC
+  height_ASC
+  height_DESC
+  bats_ASC
+  bats_DESC
+  throws_ASC
+  throws_DESC
+  debut_ASC
+  debut_DESC
+  finalGame_ASC
+  finalGame_DESC
+  retroID_ASC
+  retroID_DESC
+  bbrefID_ASC
+  bbrefID_DESC
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type Query {
+  person(where: PersonWhereUniqueInput!): Person
+  persons(where: PersonWhereInput, orderBy: PersonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Person]!
+}

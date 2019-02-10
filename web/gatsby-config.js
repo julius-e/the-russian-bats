@@ -1,0 +1,73 @@
+'use strict'
+
+module.exports = {
+  siteMetadata: {
+    title: 'MLB',
+    description: 'A Thing That Does Stuff With Stats',
+    siteUrl: 'https://',
+    author: {
+      name: 'Julius Ecker',
+      url: 'https://twitter.com/vynulz',
+      email: 'julius.ecker@gmail.com'
+    }
+  },
+  plugins: [
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'content',
+        path: `${__dirname}/src/content`
+      }
+    },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-responsive-iframe',
+            options: {
+              wrapperStyle: 'margin-bottom: 1rem'
+            }
+          },
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-smartypants',
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 1140,
+              quality: 90,
+              linkImagesToOriginal: false
+            }
+          }
+        ]
+      }
+    },
+    'gatsby-transformer-json',
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://therussianbats.com'
+      }
+    },
+    'gatsby-plugin-emotion',
+    'gatsby-plugin-typescript',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: 'gatsby-source-mysql',
+      options: {
+        connectionDetails: {
+          host: 'localhost',
+          user: 'mlb',
+          password: 'password',
+          database: 'mlb'
+        },
+        query: `SELECT * FROM mlb.Pitching WHERE yearID='2017'`,
+        idFieldName: 'playerID',
+        typePrefix: 'Pitching'
+      }
+    },
+  ]
+}

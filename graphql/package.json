@@ -1,0 +1,23 @@
+{
+  "name": "mlb-graphql",
+  "version": "1.0.0",
+  "description": "GraphQL layer",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "node -r ts-node/register src/main/ts/index.ts"
+  },
+  "author": "Julius Ecker",
+  "license": "UNLICENSED",
+  "repository": "github",
+  "dependencies": {
+    "apollo-server": "^2.4.0",
+    "graphql": "^14.1.1",
+    "prisma-client": "0.0.0",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3"
+  },
+  "devDependencies": {
+    "prisma": "^1.26.4",
+    "tslint": "^5.12.1"
+  }
+}
