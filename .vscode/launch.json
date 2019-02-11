@@ -7,9 +7,21 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Launch Import",
       "cwd": "${workspaceFolder}/data",
       "args": ["${workspaceFolder}/data/src/main/ts/import.ts"],
+      "runtimeArgs": [
+        "--require",
+        "ts-node/register"
+      ],
+      "sourceMaps": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch GraphQL",
+      "cwd": "${workspaceFolder}/graphql",
+      "args": ["${workspaceFolder}/graphql/src/main/ts/index.ts"],
       "runtimeArgs": [
         "--require",
         "ts-node/register"

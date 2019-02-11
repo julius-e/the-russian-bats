@@ -1,32 +1,28 @@
-type Query {
-  scoring(params: ScoringParams, where: PersonWhereInput, orderBy: PersonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Person]!
-  scoringConnection(params: ScoringParams, where: PersonWhereInput, orderBy: PersonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PersonConnection!
-}
-
-type HittingParams {
+input BattingParams {
   H: Int
   Double: Int
   Triple: Int
   HR: Int
-  TB: Int
-  K: Int
+  SO: Int
   BB: Int
   SB: Int
   CS: Int
 }
 
-type PitchingParams {
-  IP: Int
+input PitchingParams {
+  IPouts: Int
   W: Int
   L: Int
-  QS: Int
-  K: Int
+  R: Int
+  SO: Int
   BB: Int
+  SV: Int
+  H: Int
 }
 
-type ScoringParams {
-  Hitting: HittingParams
-  Pitching: PitchingParams
+input ScoringParams {
+  batting: BattingParams
+  pitching: PitchingParams
 }
 
 type Person {
@@ -43,6 +39,8 @@ type Person {
   height: String
   bats: String
   throws: String
+
+  scoring: Int
 
   batting: [Batting!]!
   pitching: [Batting!]!
@@ -512,4 +510,9 @@ enum PersonOrderByInput {
 type Query {
   person(where: PersonWhereUniqueInput!): Person
   persons(where: PersonWhereInput, orderBy: PersonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Person]!
+  scoring(
+    scoring: ScoringParams!, 
+    skip: Int,
+    take: Int
+  ): [Person]!
 }
