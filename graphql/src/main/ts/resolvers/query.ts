@@ -1,14 +1,14 @@
-import { Prisma } from "../prisma-client";
-import * as _ from "lodash";
-import { Scoring, defaults } from "../types/inputTypes";
-import { scoring } from "../custom-queries/scoring";
+import * as _ from 'lodash';
+import { scoring } from '../custom-queries/scoring';
+import { Prisma } from '../prisma-client';
+import { defaults, Scoring } from '../types/inputTypes';
 
 export const Query = {
   person(
     parent: any,
     args: { query: any; variables: any },
     ctx: { prisma: Prisma },
-    info: any
+    info: any,
   ) {
     console.log(JSON.stringify(args, null, 2));
     const myArgs: any = _.values(args);
@@ -20,8 +20,8 @@ export const Query = {
   },
   async scoring(
     parent: any,
-    args: { scoring: Scoring, skip: number, take: number },
-    ctx: { prisma: Prisma }
+    args: { scoring: Scoring; skip: number; take: number },
+    ctx: { prisma: Prisma },
   ) {
     const scoringVals = {
       batting: {
@@ -31,11 +31,11 @@ export const Query = {
       pitching: {
         ...defaults.pitching,
         ...args.scoring.pitching,
-      }
+      },
     };
 
     const results = await scoring(scoringVals, args.skip, args.take);
 
     return results;
-  }
+  },
 };

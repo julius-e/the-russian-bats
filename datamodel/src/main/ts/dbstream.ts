@@ -93,10 +93,7 @@ export class DBStream extends Writable {
     const size = this.buffer.length;
     return Promise.all(
       this.buffer.map(rec =>
-        this.process(rec).then(
-          () => this.x++, 
-          this.handleError(next)
-        )
+        this.process(rec).then(() => this.x++, this.handleError(next))
       )
     ).then(() => {
       this.log(`Wrote ${size} recs to the database, ${this.x} total.`);
@@ -108,9 +105,7 @@ export class DBStream extends Writable {
   _final(next: (e?: Error) => any) {
     const size = this.buffer.length;
     return Promise.all(
-      this.buffer.map(rec =>
-        this.process(rec).catch(this.handleError(next))
-      )
+      this.buffer.map(rec => this.process(rec).catch(this.handleError(next)))
     ).then(() => {
       this.log(`Wrote ${size} recs to the database, ${this.x} total.`);
       this.buffer = [];

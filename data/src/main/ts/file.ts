@@ -23,7 +23,7 @@ const pipeline = (
 export function getStreams() {
   const dbFilesPath =
     "/home/juliusecker/projects/mlb/baseballdatabank-master/core";
-  const files = ['Person.csv', 'Batting.csv', 'Pitching.csv'] // readdirSync(dbFilesPath);
+  const files = ["Person.csv", "Batting.csv", "Pitching.csv"]; // readdirSync(dbFilesPath);
   const dbFiles = files
     .filter(f => f.endsWith(".csv"))
     .map(f => ({ filename: f, tablename: f.split(".")[0], path: dbFilesPath }));

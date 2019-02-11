@@ -6,6 +6,12 @@
   "scripts": {
     "start": "node -r ts-node/register src/main/ts/index.ts"
   },
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
+  },
   "author": "Julius Ecker",
   "license": "UNLICENSED",
   "repository": "github",

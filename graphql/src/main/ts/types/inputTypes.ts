@@ -33,7 +33,7 @@ export const defaults: Scoring = {
     SB: 0,
     CS: 0,
     SO: 0,
-    BB: 0
+    BB: 0,
   },
   pitching: {
     IPouts: 0,
@@ -42,6 +42,6 @@ export const defaults: Scoring = {
     W: 0,
     L: 0,
     H: 0,
-    SV: 0
-  }
+    SV: 0,
+  },
 };
