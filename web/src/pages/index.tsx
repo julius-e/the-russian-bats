@@ -9,7 +9,7 @@ const IndexPage = () => (
   <IndexLayout>
     <Page>
       <Container>
-        <h1>Stats</h1>
+        <h1>The Russian Bats</h1>
         <Link to="/about">About</Link>
       </Container>
     </Page>
