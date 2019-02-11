@@ -1,0 +1,29 @@
+{
+  "name": "@julius-e/therussianbats",
+  "version": "1.0.0",
+  "description": "WEBSITE",
+  "main": "index.js",
+  "prettier": {
+    "trailingComma": "all",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "now": "^13.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julius-e/the-russian-bats.git"
+  },
+  "author": "Julius Ecker",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/julius-e/the-russian-bats/issues"
+  },
+  "homepage": "https://github.com/julius-e/the-russian-bats#readme"
+}

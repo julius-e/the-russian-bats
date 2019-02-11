@@ -54,20 +54,6 @@ module.exports = {
     'gatsby-plugin-typescript',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-react-helmet',
-    {
-      resolve: 'gatsby-source-mysql',
-      options: {
-        connectionDetails: {
-          host: 'localhost',
-          user: 'mlb',
-          password: 'password',
-          database: 'mlb'
-        },
-        query: `SELECT * FROM mlb.Pitching WHERE yearID='2017'`,
-        idFieldName: 'playerID',
-        typePrefix: 'Pitching'
-      }
-    },
+    'gatsby-plugin-react-helmet'
   ]
 }

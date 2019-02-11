@@ -1,12 +1,12 @@
-import * as _ from "lodash";
-import * as logUpdate from "log-update";
-import { Writable, WritableOptions } from "stream";
+import * as _ from 'lodash';
+import * as logUpdate from 'log-update';
+import { Writable, WritableOptions } from 'stream';
 import {
   BattingCreateInput,
   PersonCreateInput,
   PitchingCreateInput,
-  prisma
-} from "./prisma-client";
+  prisma,
+} from './prisma-client';
 
 const BUFFER_MAX = 1000;
 
@@ -28,49 +28,49 @@ export class DBStream extends Writable {
 
   handleError = (next: (e?: Error, ret?: any) => void) => (e: Error) => {
     console.log(
-      `((((((((((((((((((((((( HANDLED ERROR )))))))))))))))))))))))`
+      `((((((((((((((((((((((( HANDLED ERROR )))))))))))))))))))))))`,
     );
     console.log(e);
     console.log(
-      `((((((((((((((((((((((((( END ERROR )))))))))))))))))))))))))`
+      `((((((((((((((((((((((((( END ERROR )))))))))))))))))))))))))`,
     );
     this.buffer = [];
     return next();
   };
 
   sanitize(r: input): input {
-    return _.mapValues(r, v => (v === "" ? null : v)) as any;
+    return _.mapValues(r, v => (v === '' ? null : v)) as any;
   }
 
   async process(recToWrite: input): Promise<any> {
     const r = this.sanitize(recToWrite);
 
     switch (this.className) {
-      case "People": {
+      case 'People': {
         return prisma.upsertPerson({
           where: { playerID: r.playerID },
           create: r,
-          update: r
+          update: r,
         });
       }
-      case "Batting": {
+      case 'Batting': {
         return prisma.createBatting({
           ...r,
           person: {
             connect: {
-              playerID: r.playerID
-            }
-          }
+              playerID: r.playerID,
+            },
+          },
         });
       }
-      case "Pitching": {
+      case 'Pitching': {
         return prisma.createPitching({
           ...r,
           person: {
             connect: {
-              playerID: r.playerID
-            }
-          }
+              playerID: r.playerID,
+            },
+          },
         });
       }
       default: {
@@ -82,7 +82,7 @@ export class DBStream extends Writable {
   _write(
     recToWrite: BattingCreateInput,
     enc: string,
-    next: (e?: Error) => any
+    next: (e?: Error) => any,
   ) {
     this.buffer.push(recToWrite);
 
@@ -93,8 +93,8 @@ export class DBStream extends Writable {
     const size = this.buffer.length;
     return Promise.all(
       this.buffer.map(rec =>
-        this.process(rec).then(() => this.x++, this.handleError(next))
-      )
+        this.process(rec).then(() => this.x++, this.handleError(next)),
+      ),
     ).then(() => {
       this.log(`Wrote ${size} recs to the database, ${this.x} total.`);
       this.buffer = [];
@@ -105,7 +105,7 @@ export class DBStream extends Writable {
   _final(next: (e?: Error) => any) {
     const size = this.buffer.length;
     return Promise.all(
-      this.buffer.map(rec => this.process(rec).catch(this.handleError(next)))
+      this.buffer.map(rec => this.process(rec).catch(this.handleError(next))),
     ).then(() => {
       this.log(`Wrote ${size} recs to the database, ${this.x} total.`);
       this.buffer = [];

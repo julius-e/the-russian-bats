@@ -1,8 +1,8 @@
-import * as parse from "csv-parse";
-import { createReadStream } from "fs";
-import { join } from "path";
-import { DBStream } from "./dbstream";
-import { getStreams } from "./file";
+import * as parse from 'csv-parse';
+import { createReadStream } from 'fs';
+import { join } from 'path';
+import { DBStream } from './dbstream';
+import { getStreams } from './file';
 
 const pipeline = (
   ...streams: Array<
@@ -11,7 +11,7 @@ const pipeline = (
 ) =>
   new Promise((res, rej) => {
     const s = streams.reduce((accum, curr) => accum.pipe(curr));
-    s.once("finish", e => (e ? rej(e) : res()));
+    s.once('finish', e => (e ? rej(e) : res()));
   });
 
 async function run() {
@@ -22,12 +22,12 @@ async function run() {
       const parser = parse({
         cast: true,
         columns: true,
-        skip_lines_with_error: false
+        skip_lines_with_error: false,
       });
       const rs = createReadStream(join(path.path, path.filename));
       const dbStream = new DBStream({
         objectMode: true,
-        className: path.tablename
+        className: path.tablename,
       });
       await pipeline(rs as any, parser, dbStream as any);
     } catch (e) {
@@ -43,5 +43,5 @@ run().then(
     // Was full of Errors...
     console.log(e);
     process.exit(1);
-  }
+  },
 );

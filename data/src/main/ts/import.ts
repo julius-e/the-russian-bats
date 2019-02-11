@@ -1,54 +1,54 @@
-import { exec } from "child_process";
-import * as _ from "lodash";
-import * as logUpdate from "log-update";
-import * as mysql from "mysql2";
-import { join } from "path";
-import { Writable } from "stream";
-import * as through2 from "through2";
-import { FileConfig, getStreams } from "./file";
+import { exec } from 'child_process';
+import * as _ from 'lodash';
+import * as logUpdate from 'log-update';
+import * as mysql from 'mysql2';
+import { join } from 'path';
+import { Writable } from 'stream';
+import * as through2 from 'through2';
+import { FileConfig, getStreams } from './file';
 
 const BATCH_SIZE = 10000;
 
 const head = (file: string) =>
   new Promise<[string, string]>((res, rej) =>
     exec(`head -n 1 ${file}`, (err, stdout, stderr) =>
-      err ? rej(err) : res([stdout, stderr])
-    )
+      err ? rej(err) : res([stdout, stderr]),
+    ),
   );
 
 const pool = mysql.createPool({
-  host: "127.0.0.1",
-  user: "mlb",
-  password: "password",
-  database: "mlb",
+  host: '127.0.0.1',
+  user: 'mlb',
+  password: 'password',
+  database: 'mlb',
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0
+  queueLimit: 0,
 });
 
 const getConnection = () =>
   new Promise<mysql.PoolConnection>((res, rej) =>
-    pool.getConnection((err, connection) => (err ? rej(err) : res(connection)))
+    pool.getConnection((err, connection) => (err ? rej(err) : res(connection))),
   );
 
-const query = (connection: mysql.Connection) => (q: string, values?: any[]) =>
+const query = (connection: mysql.Connection) => (q: string, values?: Array<any>) =>
   new Promise<[any, any]>((res, rej) =>
     values
       ? connection.query(q, values, (err, rez, fields) =>
-          err ? rej(err) : res([rez, fields])
+          err ? rej(err) : res([rez, fields]),
         )
       : connection.query(q, (err, rez, fields) =>
-          err ? rej(err) : res([rez, fields])
-        )
+          err ? rej(err) : res([rez, fields]),
+        ),
   );
 
 const convertObjToInsert = (row: {
   [props: string]: string | number | boolean;
 }) => {
   const keys = Object.keys(row);
-  const columns = keys.map(k => `\`${k}\``).join(", ");
-  const valuesMapper = (row: { [props: string]: string | number | boolean }) =>
-    keys.map(c => String(row[c]).slice(0, 63));
+  const columns = keys.map(k => `\`${k}\``).join(', ');
+  const valuesMapper = (r: { [props: string]: string | number | boolean }) =>
+    keys.map(c => String(r[c]).slice(0, 63));
   return { columns, valuesMapper };
 };
 
@@ -56,7 +56,7 @@ const BatchStream = <T>(size: number = BATCH_SIZE) => {
   let batch: Array<T> = [];
   return through2(
     { objectMode: true },
-    (chunk: T, _, next) => {
+    (chunk: T, enc, next) => {
       if (batch.length >= size) {
         next(null, batch);
         batch = [];
@@ -69,7 +69,7 @@ const BatchStream = <T>(size: number = BATCH_SIZE) => {
       this.push(batch);
       batch = [];
       next();
-    }
+    },
   );
 };
 
@@ -91,7 +91,7 @@ class DBStream extends Writable {
   };
 
   async process(
-    recsToWrite: Array<{ [prop: string]: string | number | boolean }>
+    recsToWrite: Array<{ [prop: string]: string | number | boolean }>,
   ): Promise<void> {
     const connection = await getConnection();
     const q = query(connection);
@@ -112,7 +112,7 @@ class DBStream extends Writable {
   _write(
     recsToWrite: Array<{ [prop: string]: string | number | boolean }>,
     enc: string,
-    next: (e?: Error) => any
+    next: (e?: Error) => any,
   ) {
     this.process(recsToWrite).then(() => {
       this.log(`Wrote ${(this.x += recsToWrite.length)} rows...`);
@@ -125,7 +125,7 @@ function processFile(fileConfig: FileConfig): Array<Writable> {
   console.log(`*** Uploading Data for Table ${fileConfig.filename}`);
   return [
     BatchStream(),
-    new DBStream({ objectMode: true, className: fileConfig.tablename })
+    new DBStream({ objectMode: true, className: fileConfig.tablename }),
   ];
 }
 
@@ -145,11 +145,11 @@ async function run() {
   const createTableTasks = files.map((fileConfig: FileConfig) => async () => {
     console.log(`*** Creating Table ${fileConfig.tablename}`);
     const headersRaw = await head(join(fileConfig.path, fileConfig.filename));
-    const headers = headersRaw[0].trim().split(",");
+    const headers = headersRaw[0].trim().split(',');
     const connection = await getConnection();
     const create = `CREATE TABLE IF NOT EXISTS \`${
       fileConfig.tablename
-    }\` (${headers.map(h => `\`${h}\` VARCHAR(64)`).join(",\n")})`;
+    }\` (${headers.map(h => `\`${h}\` VARCHAR(64)`).join(',\n')})`;
     connection.release();
     const q = query(connection);
     await q(create);
@@ -160,7 +160,7 @@ async function run() {
   const zippedTasks = _.zip(
     deleteTableTasks,
     createTableTasks,
-    fileProcessorTasks
+    fileProcessorTasks,
   );
 
   for (const task of zippedTasks) {
@@ -183,5 +183,5 @@ run().then(
     // Was full of Errors...
     console.log(e);
     process.exit(1);
-  }
+  },
 );
