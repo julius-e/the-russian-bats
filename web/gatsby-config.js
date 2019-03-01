@@ -2,8 +2,8 @@
 
 module.exports = {
   siteMetadata: {
-    title: 'MLB',
-    description: 'A Thing That Does Stuff With Stats',
+    title: '⚾ The Russian Bats 2019',
+    description: 'Fantasy Baseball at its Worst',
     siteUrl: 'https://',
     author: {
       name: 'Julius Ecker',

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { graphql, Link } from 'gatsby';
-import { css } from '@emotion/core';
-import IndexLayout from '../layouts';
+import { Link, graphql } from 'gatsby';
+
 import Page from '../components/page';
 import Container from '../components/container';
+import IndexLayout from '../layouts';
+import css from '@emotion/css';
 
 export default ({ data }: any) => {
   console.log(data);
@@ -18,7 +19,7 @@ export default ({ data }: any) => {
                 border-bottom: 1px solid;
               `}
             >
-              Amazing Pandas Eating Things
+              The Russian Bats
             </h1>
             <h4>{data.allMarkdownRemark.totalCount} Posts</h4>
             {data.allMarkdownRemark.edges.map(({ node }: any) => (

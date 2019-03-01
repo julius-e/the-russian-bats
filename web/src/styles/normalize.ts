@@ -53,7 +53,6 @@ export default `
   }
 
   table {
-    width: 100%;
     margin-bottom: 1rem;
     border: 1px solid ${colors.ui.light};
     font-size: 85%;
