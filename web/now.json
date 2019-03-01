@@ -3,6 +3,6 @@
   "name": "the-russian-bats",
   "alias": ["therussianbats.com"],
   "builds": [
-    { "src": "./web/package.json", "use": "@now/static-build", "config": {"distDir": "public"} }
+    { "src": "./package.json", "use": "@now/static-build", "config": {"distDir": "public"} }
   ]
 }

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "The Russian Bats"
+title: 'The Russian Bats'
 ---
 
 Welcome to the Russian Bats baby!
