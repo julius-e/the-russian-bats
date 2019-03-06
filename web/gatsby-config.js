@@ -19,6 +19,7 @@ module.exports = {
         path: `${__dirname}/src/content`
       }
     },
+    `gatsby-transformer-csv`,
     {
       resolve: 'gatsby-transformer-remark',
       options: {

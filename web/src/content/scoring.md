@@ -18,7 +18,7 @@ Batting
 | Total Bases (TB) |  1 | `TB = H + 2*2B + 3*3B + 4*HR` |
 | Walks (BB) | 1 | |
 | Hit By Pitch (HBP) | 1 | |
-| Strkeout (K) | -1 | |
+| Strikeout (K) | -1 | |
 | Runs (R) | 1 | |
 | Runs Batted In (RBI) | 1 | |
 | Stolen Bases (SB) |  1 | |

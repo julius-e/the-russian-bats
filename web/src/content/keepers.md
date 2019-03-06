@@ -8,7 +8,7 @@ This league is a [keeper league](https://baseball.fantasysports.yahoo.com/b1/276
 Every year you allowed to carry over _some_ of your players. There are rules governing which players are eligible to be kept each year. The rules are as follows:
 
 ### Players must be in yahoo's list of players.
-Self explanitory: to keep a player, they must exist in the yahoo system. **The list of players is the responsiblilty of Yahoo, the commissioner has no control of if/when players are added**
+Self explanatory: to keep a player, they must exist in the yahoo system. **The list of players is the responsibility of Yahoo, the commissioner has no control of if/when players are added**
 
 ### You may keep up to 3 players
 You don't have to keep any players, but you can keep up to 3.

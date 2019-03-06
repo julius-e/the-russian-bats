@@ -2,7 +2,7 @@ import * as React from 'react';
 import Container from '../components/container';
 import Page from '../components/page';
 import IndexLayout from '../layouts';
-import { Link } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 
 const IndexPage = () => (
   <IndexLayout>
@@ -13,6 +13,9 @@ const IndexPage = () => (
           <a href="https://baseball.fantasysports.yahoo.com/b1/42719">
             League @ Yahoo
           </a>
+        </p>
+        <p>
+          2019 Changes <Link to={'/trb-2019-intro'}>here</Link>
         </p>
         <p>
           You can find the scoring rules <Link to={'/scoring'}>here</Link>.
@@ -37,3 +40,23 @@ const IndexPage = () => (
 );
 
 export default IndexPage;
+
+export const query = graphql`
+  query {
+    allMarkdownRemark {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+          }
+          fields {
+            slug
+          }
+          excerpt
+        }
+      }
+    }
+  }
+`;
