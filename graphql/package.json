@@ -18,7 +18,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.120",
     "@types/mysql2": "github:types/mysql2",
-    "apollo-server": "^2.4.0",
+    "apollo-server": "^2.25.4",
     "graphql": "^14.1.1",
     "lodash": "^4.17.11",
     "mysql2": "^1.6.5",
